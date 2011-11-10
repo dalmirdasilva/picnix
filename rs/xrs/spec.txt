@@ -1,0 +1,81 @@
+CLUSTER
+=================================================
+Size: 32 bytes
+Distribution:
+
+|n|p|dddddddddddddddddddddddddddddd|
+
+n: next cluster
+p: previous cluster
+d: cluster data
+
+
+RESOURCE DESCRIPTOR
+=================================================
+Size: 4 bytes
+Distribution:
+
+|ss|c|f|
+
+s: resource size
+c: first cluster of the resource
+f:	00000000 - fisical flags of the resource
+    ||||||||_1=Opened, 0=Closed
+    |||||||_ 1=Read only
+    ||||||__ Unused
+    |||||___ Unused
+    ||||____ 1=Allocated resource description
+    |||_____ Unused
+    ||______ Unused
+    |_______ Unused
+    
+    
+	
+
+RESOURCE
+=================================================
+
+Structure that contains:
+
+1 byte for: resouce descriptor
+1 byte for: first cluster of the resource
+1 byte for: current cluster of the resource
+2 byte for: resource size
+2 byte for: resource position
+1 byte for: cluster offset
+1 byte for: flags
+          // 00000000
+          // ||||||||_ 1=Opened, 0=Closed (RS_RESOURCE_FLAG_BIT_OPENED)
+          // |||||||__ 1=Read only (RS_RESOURCE_FLAG_BIT_READ_ONLY)
+          // ||||||___ 1=Error on last read, 0=No error (RS_RESOURCE_FLAG_BIT_ERROR_ON_LAST_READ)
+          // |||||____ 1=Error on last write, 0=No error (RS_RESOURCE_FLAG_BIT_ERROR_ON_LAST_WRITE)
+          // ||||_____ 1=Allocated (RS_RESOURCE_FLAG_BIT_ALLOCATED)
+          // |||______ 1=Eof-reached (RS_RESOURCE_FLAG_BIT_EOR_REACHED)
+          // ||_______ Unused
+          // |________ Unused
+
+RESOURCE ID
+=================================================
+Is a 0 up to 255 identifier.
+
+
+RS
+=================================================
+Is the first 32 bytes of the disc.
+
+FLAGS
+    // 00000000
+    // ||||||||_ 1=is mounted (RS_FLAG_BIT_DRIVER_MOUNTED)
+    // |||||||__ 1=read only (RS_FLAG_BIT_READ_ONLY)
+    // ||||||___ Unused
+    // |||||____ Unused
+    // ||||_____ Unused
+    // |||______ Unused
+    // ||_______ Unused
+    // |________ Unused
+
+
+DISC LAYOUT AFTER FORMATING
+=================================================
+
+
